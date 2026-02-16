@@ -1,25 +1,30 @@
-import express from "express"
+import express from "express";
 import mongoose from "mongoose";
-import "dotenv/config";
-import dns from "dns";
 import userRoute from "./routes/userRoutes.js";
 import errorMiddleWare from "./middleWare/errorMiddleWare.js";
+import dns from "dns";
+import "dotenv/config";
+
 dns.setServers(["8.8.8.8"]);
 
 mongoose.connect(
-    `mongodb+srv://${process.env.UserNameDB}:${process.env.PasswordDB}@${process.env.ClusterDB}.kdtuexs.mongodb.net/`,
-).then(()=>{
-    console.log("conncted to DB")
-});
+        `mongodb+srv://${process.env.UserNameDB}:${process.env.PasswordDB}@${process.env.ClusterDB}.kdtuexs.mongodb.net/`,
+        { autoIndex: true }
+    )
+    .then(() => {
+        console.log("conncted to DB");
+    });
 
-const app = express()
+const app = express();
+app.use(express.json());
 
-app.use(express.json())
-app.use("/user",userRoute)
-app.get("/",(req,res,next)=>{
-    res.send("hi")
+app.use("/user", userRoute);
+app.all("/*splat",(req,res,next)=>{
+    res.status(404).send({state:"error",message:`there is no url called:${req.url}`})
+    
 })
-app.use(errorMiddleWare)
-app.listen(process.env.port,()=>{
+
+app.use(errorMiddleWare);
+app.listen(process.env.port, () => {
     console.log(`listen to port ${process.env.port}`);
-})
+});
