@@ -1,6 +1,6 @@
 export default (err,req,res,next)=>{
-    res.status(err.statusCode || 500).send({
+    return res.status(err.statusCode || 500).send({
         state: "error",
-        msg: err.message,
+        message: err.message,
     });
 }
