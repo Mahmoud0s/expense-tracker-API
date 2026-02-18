@@ -81,11 +81,15 @@ const deleteAllUser = async (req, res) => {
 const updateUser = async (req, res, next) => {
     try {
         const userId = req.params.id;
-        const updateUser = await userModel.findOneAndUpdate(
-            { _id: userId },
-            req.body,
-            { runValidators: true, returnDocument: "after" },
-        );
+        const updateUser = await userModel.findById(userId);
+        if(!updateUser)
+            return res.status(404).send({state:"failed",message:"this user not exist"})
+        if(["admin","superAdmin"].includes(req.body.role) && req.user.role!="admin")
+            return res.status(400).send({state:"error",message:"cannot change role to admin or super admin"})
+            
+        Object.assign(updateUser,req.body)
+        await updateUser.save();
+        
         res.status(200).send({ state: "success", data: updateUser });
     } catch (error) {
         next(error);
