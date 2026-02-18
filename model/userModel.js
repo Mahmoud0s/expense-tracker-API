@@ -45,9 +45,4 @@ UserSchema.pre("deleteOne", async function () {
     if (["admin", "superAdmin"].includes(checkDeletedUser.role))
         throw new Error("cannot delete Admin or superAdmin 😑");
 });
-UserSchema.pre("findOneAndUpdate", async function () { // will change soon
-    // const updatedData = this.getUpdate(); 
-    // // if(updatedData.password)
-    // //     updatedData.password = await bcrypt.hash(updatedData.password, await bcrypt.genSalt(10));
-});
 export default mongoose.model("user", UserSchema);
