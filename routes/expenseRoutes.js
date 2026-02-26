@@ -12,7 +12,7 @@ const expenseRoutes = express.Router();
 expenseRoutes.get("/all",verifyToken,allowTo(["admin","moderator"]), getAllExpenses);
 expenseRoutes
     .route("/")
-    .post(verifyToken,allowTo(["admin", "moderator"]), createExpense)
+    .post(verifyToken,allowTo(["user","admin", "moderator"]), createExpense)
     .get(
         verifyToken,
         allExpensesRelated,
