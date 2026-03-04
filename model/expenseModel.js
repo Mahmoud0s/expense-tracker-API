@@ -11,7 +11,8 @@ const expenseShcema = mongoose.Schema({
         ref: "category",
         type: mongoose.Schema.Types.ObjectId,
     },
-    date: Date,
+    date: {type:Date , default:new Date()}
 });
+
 
 export default mongoose.model("expense", expenseShcema);
