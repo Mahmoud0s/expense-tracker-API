@@ -1,0 +1,573 @@
+{
+  "info": {
+    "_postman_id": "e66456a0-a959-4c95-a6d5-451a9164d7fe",
+    "name": "expense tracker api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39615978"
+  },
+  "item": [
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"m\",\r\n    \"userName\":\"user\",\r\n    \"password\":\"123456785\",\r\n    \"email\":\"m@gmail.com\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:7744/user/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "7744",
+              "path": [
+                "user",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userName\":\"moderator\",\r\n    \"password\":\"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get_all_users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/user?page=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get_single_user",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/user/6992f1a343b5446f975d17f6",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "6992f1a343b5446f975d17f6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete_single_user",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/user/6992dc5a3d1e65fdf8f695f4",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "6992dc5a3d1e65fdf8f695f4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete_all",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/user/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update_user",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userName\":\"updateUser011\",\r\n    \"name\":\"userNamewithPass\",\r\n    \"password\":\"12345678\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user/6992f1a343b5446f975d17f6",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "6992f1a343b5446f975d17f6"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "categories",
+      "item": [
+        {
+          "name": "create_category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"categoryName\":\"sallary\",\r\n    \"type\":\"income\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/category/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "category",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get_all_categories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/category/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "category",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get_single_category",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/category/69957e09830206aa20404b7d",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "category",
+                "69957e09830206aa20404b7d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete_single_category",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/category/69957b7772be6588e8d6f504",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "category",
+                "69957b7772be6588e8d6f504"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete_all_category",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/category/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "category",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update_single_category",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"categoryName\":\"sallary\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/category/69957e09830206aa20404b7d",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "category",
+                "69957e09830206aa20404b7d"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "expense",
+      "item": [
+        {
+          "name": "create_expense",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\":\"69955e1a5cd4535b9069dd81\",\r\n    \"categoryId\":\"69957e09830206aa20404b7d\",\r\n    \"amount\":121\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/expense",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "expense"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get_all_expenses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/expense/all?page=1&sortName=amount&sortType=ASC&minAmount=0&maxAmount=600&type=expense  &category=servies",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "expense",
+                "all"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "sortName",
+                  "value": "amount"
+                },
+                {
+                  "key": "sortType",
+                  "value": "ASC"
+                },
+                {
+                  "key": "to",
+                  "value": "2026-4-15",
+                  "disabled": true
+                },
+                {
+                  "key": "from",
+                  "value": "2013-4-1",
+                  "disabled": true
+                },
+                {
+                  "key": "minAmount",
+                  "value": "0"
+                },
+                {
+                  "key": "maxAmount",
+                  "value": "600"
+                },
+                {
+                  "key": "type",
+                  "value": "expense  "
+                },
+                {
+                  "key": "category",
+                  "value": "servies"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update_expense",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"amount\":16492,\r\n    \"categoryId\":\"69a09d4452e0221db691a58d\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/expense/699c43fb5ff229ef25935e83",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "expense",
+                "699c43fb5ff229ef25935e83"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete_expense",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/expense/699c43fb5ff229ef25935e83",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "expense",
+                "699c43fb5ff229ef25935e83"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get_releated_expenses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/expense/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "expense",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "month_summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "berear {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/expense/monthlySummary",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "expense",
+                "monthlySummary"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "2013-7-18",
+                  "disabled": true
+                },
+                {
+                  "key": "to",
+                  "value": "2027",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
