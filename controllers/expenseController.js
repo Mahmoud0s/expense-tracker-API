@@ -146,7 +146,7 @@ const expenseSummary = async (req, res, next) => {
                 $group: {
                     _id: "$categoryData.categoryName",
                     type: { $first: "$categoryData.type" },
-                    total: {$sum: "$amount"},
+                    total: { $sum: "$amount" },
                     count: { $sum: 1 },
                 },
             },
@@ -154,18 +154,67 @@ const expenseSummary = async (req, res, next) => {
                 $group: {
                     _id: null,
                     category: {
-                        $push: {_id: "$_id", total:"$total", count: "$count", type:"$type"}
+                        $push: {
+                            _id: "$_id",
+                            total: "$total",
+                            count: "$count",
+                            type: "$type",
+                        },
                     },
-                    totalIncome: { $sum: {$cond:[{$eq:["$type","income"]},"$total",0]} },
-                    totalExpense: { $sum: {$cond:[{$eq:["$type","expense"]},"$total",0]} },
+                    totalIncome: {
+                        $sum: {
+                            $cond: [{ $eq: ["$type", "income"] }, "$total", 0],
+                        },
+                    },
+                    totalExpense: {
+                        $sum: {
+                            $cond: [{ $eq: ["$type", "expense"] }, "$total", 0],
+                        },
+                    },
                 },
             },
             {
                 $addFields: {
                     net: { $subtract: ["$totalIncome", "$totalExpense"] },
-                    mostCategoryUsed:{$max:"$category.count"},
-                    // mostCategoryIncome:{$max:{$cond:[{$eq:["$category.type","income"]},"$category.total",0]} }, // gonna chnage soon with filter
-                    // mostCategoryExpense:{$max:{$cond:[{$eq:["$category.type","expense"]},"$category.total",0]}},
+                    mostCategoryUsed: { $max: "$category.count" },
+                    mostCategoryIncome: {
+                        $first: {
+                            $sortArray: {
+                                input: {
+                                    $filter: {
+                                        input: "$category",
+                                        as: "item",
+                                        cond: {
+                                            $eq: ["$$item.type", "income"],
+                                        },
+                                    },
+                                },
+                                sortBy: { count: -1 },
+                            },
+                        },
+                    },
+                    mostCategoryExpense: {
+                        $first: {
+                            $sortArray: {
+                                input: {
+                                    $filter: {
+                                        input: "$category",
+                                        as: "item",
+                                        cond: {
+                                            $eq: ["$$item.type", "expense"],
+                                        },
+                                    },
+                                },
+                                sortBy: { count: -1 },
+                            },
+                        },
+                    },
+                },
+            },
+            {
+                $project: {
+                    "mostCategoryIncome.type": 0,
+                    "mostCategoryExpense.type": 0,
                 },
             },
         ];
@@ -249,4 +298,3 @@ export {
     allExpensesRelated,
     expenseSummary,
 };
-
