@@ -7,9 +7,11 @@ import {
     updateSingleExpense,
     deleteSingleExpense,
     allExpensesRelated,
+    expenseSummary,
 } from "../controllers/expenseController.js";
 const expenseRoutes = express.Router();
 expenseRoutes.get("/all",verifyToken,allowTo(["admin","moderator"]), getAllExpenses);
+expenseRoutes.get("/monthlySummary",verifyToken, expenseSummary);
 expenseRoutes
     .route("/")
     .post(verifyToken,allowTo(["user","admin", "moderator"]), createExpense)
