@@ -73,12 +73,15 @@ Most used categories for income/expenses
 | DELETE | /expense/:expenseId     | Admin, SuperAdmin      | Delete an expense               |
 
 # (.env)
+```
 UserNameDB=yourMongoDBUsername
 PasswordDB=yourMongoDBPassword
 ClusterDB=yourClusterName
 privateKey=yourJWTSecret
 port=5000
-
+```
 ## Installation & Run
+```
 npm intall  ; 
 npm run dev ;
+```
